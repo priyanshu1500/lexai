@@ -1,0 +1,19 @@
+{
+  "name": "lexai",
+  "version": "1.0.0",
+  "description": "LexAI - Autonomous Legal AI System for Indian Courts & Regulatory Bodies",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Building LexAI static assets...' && mkdir -p public && cp index.html public/ 2>/dev/null || xcopy index.html public\\ /Y /I 2>nul || exit 0",
+    "start": "python -m http.server 8000"
+  },
+  "keywords": [
+    "legal-ai",
+    "lexai",
+    "law-tech",
+    "citation-engine",
+    "e-courts"
+  ],
+  "author": "LexAI Team",
+  "license": "MIT"
+}

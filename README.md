@@ -20,3 +20,4 @@ LexAI is an autonomous legal AI system designed for legal practitioners in India
 
 ---
 Created and maintained by 360Labs / LexAI Team.
+

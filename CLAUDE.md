@@ -12,3 +12,4 @@ GitHub Issues (`gh` CLI). See `docs/agents/issue-tracker.md`.
 
 ### Domain docs
 Single-context (`CONTEXT.md` at repo root, ADRs under `docs/adr/`). See `docs/agents/domain.md`.
+

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LexAI — World-Class Legal Intelligence System</title>
+    <title>LexAI — Autonomous Legal Intelligence & Case Automation</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Archivo & JetBrains Mono as seen in Kinetics -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -19,26 +19,30 @@
             theme: {
                 extend: {
                     colors: {
-                        navy: {
-                            DEFAULT: '#031A34',
-                            950: '#021225',
-                            900: '#031A34',
-                            800: '#07264A',
-                            700: '#0C3463',
-                            border: '#0F417A'
+                        obsidian: {
+                            DEFAULT: '#0E0E10',
+                            950: '#070708',
+                            900: '#0E0E10',
+                            800: '#17171A',
+                            700: '#232326',
+                            border: '#2A2A2E'
                         },
-                        mint: {
-                            DEFAULT: '#ADEFD1',
-                            50: '#F0FDFA',
-                            100: '#CCFBF1',
-                            200: '#ADEFD1',
-                            300: '#86E2BB',
-                            400: '#52CBA3',
-                            dark: '#031A34'
+                        amber: {
+                            DEFAULT: '#FF8A00',
+                            light: '#FFA633',
+                            dark: '#B36200',
+                            glow: 'rgba(255, 138, 0, 0.22)'
+                        },
+                        kinetic: {
+                            muted: '#6E6C68',
+                            light: '#A8A6A0',
+                            success: '#4CD08A',
+                            info: '#5B8DEF',
+                            danger: '#FF5C5C'
                         }
                     },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['"Archivo"', 'sans-serif'],
                         mono: ['"JetBrains Mono"', 'monospace']
                     }
                 }
@@ -48,58 +52,75 @@
 
     <style>
         :root {
+            --bg: #0E0E10;
+            --surface-1: #17171A;
+            --surface-2: #232326;
+            --border-dim: #2A2A2E;
+            --amber: #FF8A00;
+            --amber-glow: rgba(255, 138, 0, 0.25);
             --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
             --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --color-navy: #031A34;
-            --color-mint: #ADEFD1;
+            --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         body {
-            background-color: #031A34;
+            background-color: var(--bg);
             color: #FFFFFF;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Archivo', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Emil Kowalski & Apple Design Button Press Feedback */
+        /* Emil Kowalski Button Press with Tactile Handoff */
         .btn-press {
-            transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out), box-shadow 140ms var(--ease-out), border-color 140ms var(--ease-out);
+            transition: transform 140ms var(--ease-out), background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
             touch-action: manipulation;
         }
         .btn-press:active {
             transform: scale(0.97);
         }
 
-        /* Two-Tone High Contrast Bento Cards */
-        .bento-card-navy {
-            background-color: #031A34;
-            border: 1px solid rgba(173, 239, 209, 0.18);
-            box-shadow: 0 12px 40px -10px rgba(2, 18, 37, 0.8);
-            border-radius: 24px;
-            transition: border-color 200ms var(--ease-out), transform 200ms var(--ease-out);
-        }
-        .bento-card-navy:hover {
-            border-color: rgba(173, 239, 209, 0.4);
-        }
-
-        /* Mint Secondary Panel (Direct Reference from User Image #ADEFD1) */
-        .bento-panel-mint {
-            background-color: #ADEFD1;
-            color: #031A34;
+        /* Bento Grid Tile Specs */
+        .bento-tile {
+            background-color: var(--surface-1);
+            border: 1px solid var(--border-dim);
             border-radius: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+            transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+        }
+        .bento-tile:hover {
+            border-color: rgba(255, 138, 0, 0.35);
         }
 
-        /* Mint Glow Accent */
-        .glow-mint {
-            box-shadow: 0 0 35px -5px rgba(173, 239, 209, 0.25);
+        /* Highlight Kinetics Amber Panel */
+        .bento-amber {
+            background: linear-gradient(145deg, #FF8A00, #E67A00);
+            color: #0E0E10;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px -8px rgba(255, 138, 0, 0.35);
         }
 
-        /* Tab Switch Micro-Interactions */
+        /* Amber Glow Accent */
+        .glow-amber {
+            box-shadow: 0 0 35px -5px var(--amber-glow);
+        }
+
+        /* Segmented Nav Pill Snap Rail (Kinetics Pattern) */
+        .nav-snap-btn {
+            position: relative;
+            transition: color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+        }
+        .nav-snap-btn.active {
+            background-color: var(--amber);
+            color: #0E0E10;
+            font-weight: 700;
+        }
+
+        /* Tab Transition */
         .tab-pane {
             display: none;
             opacity: 0;
             transform: translateY(8px) scale(0.99);
-            transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+            transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
         }
         .tab-pane.active {
             display: block;
@@ -113,187 +134,187 @@
             height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #021225;
+            background: #0E0E10;
         }
         ::-webkit-scrollbar-thumb {
-            background: #0F417A;
+            background: #2A2A2E;
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #ADEFD1;
+            background: #FF8A00;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-mint selection:text-navy">
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber selection:text-obsidian-900">
 
-    <!-- Top Navigation Header with Mint Accent Pill -->
-    <header class="sticky top-0 z-50 bg-navy-950/90 backdrop-blur-md border-b border-mint/20 px-6 py-4">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-obsidian-950/90 backdrop-blur-md border-b border-obsidian-border px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-mint flex items-center justify-center shadow-lg shadow-mint/20">
-                    <i data-lucide="scale" class="w-5 h-5 text-navy-900"></i>
+                <div class="w-10 h-10 rounded-xl bg-amber flex items-center justify-center shadow-lg shadow-amber/20">
+                    <i data-lucide="scale" class="w-5 h-5 text-obsidian-900 stroke-[2.5]"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold tracking-tight text-mint flex items-center gap-2">
-                        LexAI <span class="text-[11px] font-mono font-semibold px-2 py-0.5 rounded-full bg-mint text-navy-900">v1.0 Pro</span>
+                    <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        LexAI <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber/15 text-amber border border-amber/30">Enterprise Engine</span>
                     </h1>
-                    <p class="text-xs text-mint/80 font-medium">Tier-1 Legal Intelligence System</p>
+                    <p class="text-xs text-kinetic-muted font-medium">Supreme Court & Tribunal Research • Dual Verification • Cause List Sync</p>
                 </div>
             </div>
 
-            <!-- Tab Navigation Bar -->
-            <nav class="hidden md:flex items-center space-x-1 bg-navy-800 p-1.5 rounded-2xl border border-mint/20">
-                <button onclick="switchTab('extractor')" id="tab-extractor" class="nav-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-navy-900 bg-mint shadow-md flex items-center gap-2">
+            <!-- Segmented Rail Navigation -->
+            <nav class="hidden md:flex items-center space-x-1 bg-obsidian-800 p-1.5 rounded-2xl border border-obsidian-border">
+                <button onclick="switchTab('extractor')" id="tab-extractor" class="nav-snap-btn active btn-press px-4 py-2 text-xs font-bold rounded-xl text-obsidian-900 bg-amber flex items-center gap-2">
                     <i data-lucide="sparkles" class="w-4 h-4"></i> Proposition Distiller
                 </button>
-                <button onclick="switchTab('citation')" id="tab-citation" class="nav-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-mint/80 hover:text-mint flex items-center gap-2">
-                    <i data-lucide="book-open" class="w-4 h-4"></i> Citation Engine
+                <button onclick="switchTab('citation')" id="tab-citation" class="nav-snap-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-kinetic-light hover:text-white flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Citation Converter
                 </button>
-                <button onclick="switchTab('verification')" id="tab-verification" class="nav-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-mint/80 hover:text-mint flex items-center gap-2">
+                <button onclick="switchTab('verification')" id="tab-verification" class="nav-snap-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-kinetic-light hover:text-white flex items-center gap-2">
                     <i data-lucide="shield-check" class="w-4 h-4"></i> Dual Verifier
                 </button>
-                <button onclick="switchTab('workspace')" id="tab-workspace" class="nav-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-mint/80 hover:text-mint flex items-center gap-2">
-                    <i data-lucide="calendar" class="w-4 h-4"></i> Lawyer Workspace
+                <button onclick="switchTab('workspace')" id="tab-workspace" class="nav-snap-btn btn-press px-4 py-2 text-xs font-bold rounded-xl text-kinetic-light hover:text-white flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> Cause List & Notes
                 </button>
             </nav>
 
             <div class="flex items-center space-x-3">
-                <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-mint/10 text-mint border border-mint/30 text-xs font-semibold">
-                    <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span> Active Engine
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber/10 text-amber border border-amber/30 text-xs font-mono font-bold">
+                    <span class="w-2 h-2 rounded-full bg-amber animate-pulse"></span> SYSTEM ONLINE
                 </div>
-                <a href="https://github.com/priyanshu1500/lexai" target="_blank" class="btn-press p-2.5 rounded-xl bg-navy-800 border border-mint/30 text-mint hover:bg-mint hover:text-navy-900 transition">
+                <a href="https://github.com/priyanshu1500/lexai" target="_blank" class="btn-press p-2.5 rounded-xl bg-obsidian-800 border border-obsidian-border text-kinetic-light hover:text-white hover:border-amber/40 transition">
                     <i data-lucide="github" class="w-4 h-4"></i>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 space-y-8">
 
-        <!-- TAB 1: Senior Advocate Proposition Distiller (Bento Grid Architecture) -->
+        <!-- TAB 1: Senior Advocate Proposition Distiller (Bento Grid) -->
         <div id="pane-extractor" class="tab-pane active space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-3xl font-extrabold tracking-tight text-mint flex items-center gap-3">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
                         Senior Advocate Proposition Distiller
-                        <span class="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-mint text-navy-900">Ratio Decidendi</span>
+                        <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-amber/15 text-amber border border-amber/30">Ratio Decidendi Engine</span>
                     </h2>
-                    <p class="text-sm text-mint/80 mt-1 max-w-3xl">Converts multi-page factual client briefs into a single crisp proposition of law and generates proximity Boolean search queries.</p>
+                    <p class="text-sm text-kinetic-light mt-1 max-w-3xl">Converts multi-page factual client briefs into a single crisp proposition of law and generates proximity Boolean search queries.</p>
                 </div>
             </div>
 
-            <!-- Bento Grid 12-Column Layout -->
+            <!-- Bento 12-Column Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <!-- Bento Cell 1: Factual Input Panel (Span 7) -->
-                <div class="lg:col-span-7 bento-card-navy p-6 flex flex-col justify-between space-y-4">
+                <div class="lg:col-span-7 bento-tile p-6 flex flex-col justify-between space-y-4">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <label class="text-xs font-bold text-mint uppercase tracking-wider flex items-center gap-2">
-                                <i data-lucide="file-text" class="w-4 h-4 text-mint"></i> Client Factual Brief / Lengthy Prompt
+                            <label class="text-xs font-bold text-amber uppercase tracking-wider flex items-center gap-2 font-mono">
+                                <i data-lucide="file-text" class="w-4 h-4 text-amber"></i> Client Factual Brief / Lengthy Prompt
                             </label>
-                            <button onclick="loadSamplePrompt('minority')" class="text-xs font-semibold text-mint hover:underline">Sample 1: Shareholder Dilution</button>
+                            <button onclick="loadSamplePrompt('minority')" class="text-xs font-bold text-amber hover:underline">Sample 1: Shareholder Dilution</button>
                         </div>
 
-                        <textarea id="brief-input" rows="9" class="w-full bg-navy-950 border border-mint/20 rounded-xl p-4 text-sm text-white placeholder-mint/40 focus:outline-none focus:border-mint transition font-sans leading-relaxed" placeholder="Paste verbose client facts, petition excerpts, or multi-page legal prompt here..."></textarea>
+                        <textarea id="brief-input" rows="9" class="w-full bg-obsidian-950 border border-obsidian-border rounded-xl p-4 text-sm text-white placeholder-kinetic-muted focus:outline-none focus:border-amber transition font-sans leading-relaxed" placeholder="Paste verbose client facts, petition excerpts, or multi-page legal prompt here..."></textarea>
                     </div>
 
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
                         <div class="flex gap-2">
-                            <button onclick="loadSamplePrompt('pmla')" class="btn-press text-xs px-3 py-1.5 rounded-lg bg-navy-800 text-mint border border-mint/30 hover:bg-mint hover:text-navy-900">Sample PMLA</button>
-                            <button onclick="loadSamplePrompt('ibc')" class="btn-press text-xs px-3 py-1.5 rounded-lg bg-navy-800 text-mint border border-mint/30 hover:bg-mint hover:text-navy-900">Sample IBC</button>
+                            <button onclick="loadSamplePrompt('pmla')" class="btn-press text-xs px-3 py-1.5 rounded-lg bg-obsidian-800 text-kinetic-light border border-obsidian-border hover:border-amber/50 hover:text-white font-medium">Sample PMLA</button>
+                            <button onclick="loadSamplePrompt('ibc')" class="btn-press text-xs px-3 py-1.5 rounded-lg bg-obsidian-800 text-kinetic-light border border-obsidian-border hover:border-amber/50 hover:text-white font-medium">Sample IBC</button>
                         </div>
-                        <button onclick="distillProposition()" class="btn-press px-6 py-3 rounded-xl bg-mint text-navy-900 font-extrabold text-sm shadow-lg shadow-mint/20 flex items-center justify-center gap-2">
-                            <i data-lucide="sparkles" class="w-4 h-4"></i> Distill Proposition of Law
+                        <button onclick="distillProposition()" class="btn-press px-6 py-3 rounded-xl bg-amber text-obsidian-900 font-extrabold text-sm shadow-lg shadow-amber/20 flex items-center justify-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4 stroke-[2.5]"></i> Distill Proposition of Law
                         </button>
                     </div>
                 </div>
 
                 <!-- Bento Cell 2: Output Proposition & Boolean Engine (Span 5) -->
-                <div class="lg:col-span-5 bento-card-navy p-6 flex flex-col justify-between space-y-5 glow-mint">
+                <div class="lg:col-span-5 bento-tile p-6 flex flex-col justify-between space-y-5 glow-amber">
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between pb-3 border-b border-mint/20">
-                            <span class="text-xs font-bold text-mint uppercase tracking-wider flex items-center gap-2">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-mint"></i> Distilled Legal Issue
+                        <div class="flex items-center justify-between pb-3 border-b border-obsidian-border">
+                            <span class="text-xs font-bold text-kinetic-light uppercase tracking-wider flex items-center gap-2 font-mono">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-amber"></i> Distilled Legal Issue
                             </span>
-                            <span id="aop-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-mint text-navy-900">AoP-1: Corporate Law</span>
+                            <span id="aop-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-amber text-obsidian-900 font-mono">AoP-1: Corporate Law</span>
                         </div>
 
                         <!-- Single-line Proposition Display -->
-                        <div class="p-5 rounded-2xl bg-navy-800 border border-mint/30 space-y-2">
-                            <span class="text-[11px] font-mono text-mint uppercase tracking-widest block font-bold">Single-Line Ratio Decidendi</span>
+                        <div class="p-5 rounded-2xl bg-obsidian-800 border border-amber/30 space-y-2">
+                            <span class="text-[11px] font-mono text-amber uppercase tracking-widest block font-bold">Single-Line Ratio Decidendi</span>
                             <p id="output-proposition" class="text-sm font-semibold text-white leading-relaxed italic">
                                 "Whether the issuance of rights shares resulting in equity dilution of a minority shareholder without mandatory notice constitutes oppression and mismanagement under Section 241/242 of the Companies Act, 2013."
                             </p>
                         </div>
 
                         <!-- Boolean Query Box -->
-                        <div class="p-4 rounded-2xl bg-navy-950 border border-mint/20 space-y-2">
+                        <div class="p-4 rounded-2xl bg-obsidian-950 border border-obsidian-border space-y-2">
                             <div class="flex items-center justify-between">
-                                <span class="text-[11px] font-mono text-mint/90 uppercase tracking-widest flex items-center gap-1.5 font-bold">
+                                <span class="text-[11px] font-mono text-amber uppercase tracking-widest flex items-center gap-1.5 font-bold">
                                     <i data-lucide="search" class="w-3.5 h-3.5"></i> Proximity Boolean Search
                                 </span>
-                                <button onclick="copyBooleanQuery()" class="btn-press text-xs font-bold text-mint hover:underline flex items-center gap-1">
+                                <button onclick="copyBooleanQuery()" class="btn-press text-xs font-bold text-amber hover:underline flex items-center gap-1 font-mono">
                                     <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
                                 </button>
                             </div>
-                            <code id="output-boolean" class="text-xs font-mono text-mint block break-all leading-normal bg-navy-800 p-3 rounded-xl border border-mint/20">
+                            <code id="output-boolean" class="text-xs font-mono text-kinetic-light block break-all leading-normal bg-obsidian-800 p-3 rounded-xl border border-obsidian-border">
                                 ("Companies Act" OR "Section 241") AND ("oppression" NEAR/5 "mismanagement") AND "dilution"
                             </code>
                         </div>
                     </div>
 
-                    <!-- Secondary Mint Panel (Direct Match to User Reference Palette #ADEFD1) -->
-                    <div class="bento-panel-mint p-4 space-y-1 shadow-md">
+                    <!-- Highlight Kinetics Amber Panel -->
+                    <div class="bento-amber p-4 space-y-1 shadow-md">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-navy-900 flex items-center gap-1.5">
-                                <i data-lucide="shield-alert" class="w-4 h-4"></i> Practice Area Classifier
+                            <span class="text-xs font-black uppercase tracking-wider text-obsidian-900 flex items-center gap-1.5 font-mono">
+                                <i data-lucide="shield-alert" class="w-4 h-4 stroke-[2.5]"></i> Practice Area Classifier
                             </span>
-                            <span id="aop-score" class="text-xs font-mono font-extrabold text-navy-900">98.4% Match</span>
+                            <span id="aop-score" class="text-xs font-mono font-black text-obsidian-900">98.4% Match</span>
                         </div>
-                        <p class="text-xs font-medium text-navy-900/90">Categorized under Corporate Governance & Minority Shareholder Protections.</p>
+                        <p class="text-xs font-semibold text-obsidian-900/90 leading-snug">Mapped directly to Corporate Governance, Companies Act 2013, and NCLT Appellate precedents.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 2: Multi-Standard Citation Engine -->
+        <!-- TAB 2: Multi-Standard Citation Converter -->
         <div id="pane-citation" class="tab-pane space-y-6">
             <div>
-                <h2 class="text-3xl font-extrabold tracking-tight text-mint flex items-center gap-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
                     Multi-Standard Citation Engine & Converter
                 </h2>
-                <p class="text-sm text-mint/80 mt-1">Normalizes, parses, and converts Indian legal citations across Supreme Court Neutral Citations (`INSC`), SCC, AIR, SCR, SILC, Bluebook, and OSCOLA.</p>
+                <p class="text-sm text-kinetic-light mt-1">Normalizes, parses, and converts Indian legal citations across Supreme Court Neutral Citations (`INSC`), SCC, AIR, SCR, SILC, Bluebook, and OSCOLA.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Input Citation Form -->
-                <div class="bento-card-navy p-6 space-y-4">
-                    <label class="text-xs font-bold text-mint uppercase tracking-wider block">Enter Legal Citation</label>
-                    <input type="text" id="citation-input" value="(2018) 1 SCC 1" class="w-full bg-navy-950 border border-mint/30 rounded-xl px-4 py-3 text-sm text-white font-mono focus:outline-none focus:border-mint">
-                    <button onclick="parseCitation()" class="btn-press w-full py-3 rounded-xl bg-mint text-navy-900 font-extrabold text-xs flex items-center justify-center gap-2">
-                        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Parse & Convert Formats
+                <div class="bento-tile p-6 space-y-4">
+                    <label class="text-xs font-bold text-amber uppercase tracking-wider block font-mono">Enter Legal Citation</label>
+                    <input type="text" id="citation-input" value="(2018) 1 SCC 1" class="w-full bg-obsidian-950 border border-obsidian-border rounded-xl px-4 py-3 text-sm text-white font-mono focus:outline-none focus:border-amber">
+                    <button onclick="parseCitation()" class="btn-press w-full py-3 rounded-xl bg-amber text-obsidian-900 font-extrabold text-xs flex items-center justify-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4 stroke-[2.5]"></i> Parse & Convert Formats
                     </button>
                 </div>
 
                 <!-- Converted Formats Grid -->
-                <div class="md:col-span-2 bento-card-navy p-6 space-y-4">
-                    <span class="text-xs font-bold text-mint uppercase tracking-wider block">Normalized Citation Standards</span>
+                <div class="md:col-span-2 bento-tile p-6 space-y-4">
+                    <span class="text-xs font-bold text-amber uppercase tracking-wider block font-mono">Normalized Citation Standards</span>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-4 rounded-2xl bg-navy-800 border border-mint/20 space-y-1">
-                            <span class="text-[10px] font-mono text-mint uppercase font-bold">Supreme Court Cases (SCC)</span>
+                        <div class="p-4 rounded-2xl bg-obsidian-800 border border-obsidian-border space-y-1">
+                            <span class="text-[10px] font-mono text-amber uppercase font-bold">Supreme Court Cases (SCC)</span>
                             <p id="cite-scc" class="text-sm font-mono text-white font-bold">(2018) 1 SCC 1</p>
                         </div>
-                        <div class="p-4 rounded-2xl bg-navy-800 border border-mint/20 space-y-1">
-                            <span class="text-[10px] font-mono text-mint uppercase font-bold">Official Supreme Court Neutral (INSC)</span>
+                        <div class="p-4 rounded-2xl bg-obsidian-800 border border-obsidian-border space-y-1">
+                            <span class="text-[10px] font-mono text-amber uppercase font-bold">Official Supreme Court Neutral (INSC)</span>
                             <p id="cite-insc" class="text-sm font-mono text-white font-bold">2018 INSC 102</p>
                         </div>
-                        <div class="p-4 rounded-2xl bg-navy-800 border border-mint/20 space-y-1">
-                            <span class="text-[10px] font-mono text-mint uppercase font-bold">Standard Indian Legal Citation (SILC)</span>
+                        <div class="p-4 rounded-2xl bg-obsidian-800 border border-obsidian-border space-y-1">
+                            <span class="text-[10px] font-mono text-amber uppercase font-bold">Standard Indian Legal Citation (SILC)</span>
                             <p id="cite-silc" class="text-sm font-mono text-white font-bold">(2018) 1 SCC 1 (India)</p>
                         </div>
-                        <div class="p-4 rounded-2xl bg-navy-800 border border-mint/20 space-y-1">
-                            <span class="text-[10px] font-mono text-mint uppercase font-bold">Bluebook / OSCOLA</span>
+                        <div class="p-4 rounded-2xl bg-obsidian-800 border border-obsidian-border space-y-1">
+                            <span class="text-[10px] font-mono text-amber uppercase font-bold">Bluebook / OSCOLA</span>
                             <p id="cite-bluebook" class="text-sm font-mono text-white font-bold">(2018) 1 S.C.C. 1 / [2018] 1 SCC 1</p>
                         </div>
                     </div>
@@ -304,53 +325,53 @@
         <!-- TAB 3: Dual Judgment Verification Simulator -->
         <div id="pane-verification" class="tab-pane space-y-6">
             <div>
-                <h2 class="text-3xl font-extrabold tracking-tight text-mint flex items-center gap-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
                     Dual Judgment Verification Engine
                 </h2>
-                <p class="text-sm text-mint/80 mt-1">Extracts judgment reference numbers from commercial SCC copies, pulls official government copies (`sci.gov.in`, `ecourts.gov.in`), and executes automated cryptographic & embedding diff verification.</p>
+                <p class="text-sm text-kinetic-light mt-1">Extracts judgment reference numbers from commercial SCC copies, pulls official government copies (`sci.gov.in`, `ecourts.gov.in`), and executes automated cryptographic & embedding diff verification.</p>
             </div>
 
-            <div class="bento-card-navy p-6 space-y-6">
+            <div class="bento-tile p-6 space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- SCC Copy -->
-                    <div class="p-5 rounded-2xl bg-navy-800 border border-mint/20 space-y-3">
+                    <div class="p-5 rounded-2xl bg-obsidian-800 border border-obsidian-border space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-mint flex items-center gap-2">
-                                <i data-lucide="file-check" class="w-4 h-4"></i> SCC Online Commercial Copy
+                            <span class="text-xs font-bold text-amber flex items-center gap-2 font-mono">
+                                <i data-lucide="file-check" class="w-4 h-4 text-amber"></i> SCC Online Commercial Copy
                             </span>
-                            <span class="text-[10px] font-mono bg-mint text-navy-900 px-2 py-0.5 rounded font-bold">CLI Download</span>
+                            <span class="text-[10px] font-mono bg-amber/20 text-amber border border-amber/30 px-2 py-0.5 rounded font-bold">CLI Ingest</span>
                         </div>
-                        <div class="text-xs font-mono text-mint/80 bg-navy-950 p-3.5 rounded-xl border border-mint/10 space-y-1">
+                        <div class="text-xs font-mono text-kinetic-light bg-obsidian-950 p-3.5 rounded-xl border border-obsidian-border space-y-1">
                             <p class="text-white font-bold">Citation: (2024) 4 SCC 120</p>
                             <p>Bench: Hon'ble D.Y. Chandrachud C.J.I, Sanjiv Khanna J.</p>
                             <p>CNR: SCIN010023412024</p>
-                            <p class="text-gray-300 pt-1">"...Held, minority rights cannot be defeated by fraudulent board resolutions without notice..."</p>
+                            <p class="text-kinetic-muted pt-1">"...Held, minority rights cannot be defeated by fraudulent board resolutions without notice..."</p>
                         </div>
                     </div>
 
                     <!-- Government Portal Official Copy -->
-                    <div class="p-5 rounded-2xl bg-navy-800 border border-mint/20 space-y-3">
+                    <div class="p-5 rounded-2xl bg-obsidian-800 border border-obsidian-border space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-mint flex items-center gap-2">
-                                <i data-lucide="building-2" class="w-4 h-4"></i> Supreme Court Digital Portal (sci.gov.in)
+                            <span class="text-xs font-bold text-kinetic-success flex items-center gap-2 font-mono">
+                                <i data-lucide="building-2" class="w-4 h-4 text-kinetic-success"></i> Supreme Court Digital Portal (sci.gov.in)
                             </span>
-                            <span class="text-[10px] font-mono bg-mint text-navy-900 px-2 py-0.5 rounded font-bold">Verified Gov Source</span>
+                            <span class="text-[10px] font-mono bg-kinetic-success/15 text-kinetic-success border border-kinetic-success/30 px-2 py-0.5 rounded font-bold">Verified Gov Portal</span>
                         </div>
-                        <div class="text-xs font-mono text-mint/80 bg-navy-950 p-3.5 rounded-xl border border-mint/10 space-y-1">
+                        <div class="text-xs font-mono text-kinetic-light bg-obsidian-950 p-3.5 rounded-xl border border-obsidian-border space-y-1">
                             <p class="text-white font-bold">Neutral Citation: 2024 INSC 341</p>
                             <p>Bench: Hon'ble D.Y. Chandrachud C.J.I, Sanjiv Khanna J.</p>
                             <p>CNR: SCIN010023412024</p>
-                            <p class="text-gray-300 pt-1">"...Held, minority rights cannot be defeated by fraudulent board resolutions without notice..."</p>
+                            <p class="text-kinetic-muted pt-1">"...Held, minority rights cannot be defeated by fraudulent board resolutions without notice..."</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-mint/20">
-                    <button onclick="runVerification()" class="btn-press px-6 py-3 rounded-xl bg-mint text-navy-900 font-extrabold text-sm flex items-center gap-2 shadow-lg shadow-mint/20">
-                        <i data-lucide="shield-check" class="w-4 h-4"></i> Run Cryptographic & Embedding Diff Verification
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-obsidian-border">
+                    <button onclick="runVerification()" class="btn-press px-6 py-3 rounded-xl bg-amber text-obsidian-900 font-extrabold text-sm flex items-center gap-2 shadow-lg shadow-amber/20">
+                        <i data-lucide="shield-check" class="w-4 h-4 stroke-[2.5]"></i> Run Cryptographic & Embedding Diff Verification
                     </button>
-                    <div id="verifier-result" class="hidden flex items-center gap-3 px-4 py-2 rounded-xl bg-mint text-navy-900 text-xs font-mono font-extrabold">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i> 100% Exact Match Verified (SHA-256 & Cosine Similarity = 1.000)
+                    <div id="verifier-result" class="hidden flex items-center gap-3 px-4 py-2 rounded-xl bg-amber/15 text-amber border border-amber/30 text-xs font-mono font-extrabold">
+                        <i data-lucide="check-circle" class="w-4 h-4 stroke-[2.5]"></i> 100% Exact Match Verified (SHA-256 & Cosine Similarity = 1.000)
                     </div>
                 </div>
             </div>
@@ -359,64 +380,64 @@
         <!-- TAB 4: Lawyer Workspace Calendar & Cause List -->
         <div id="pane-workspace" class="tab-pane space-y-6">
             <div>
-                <h2 class="text-3xl font-extrabold tracking-tight text-mint flex items-center gap-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
                     Lawyer Workspace & Cause-List Automation
                 </h2>
-                <p class="text-sm text-mint/80 mt-1">Automates daily cause-list parsing from Supreme Court & High Courts, updates lawyer calendar, synthesizes Key Case Notes, and dispatches email digests.</p>
+                <p class="text-sm text-kinetic-light mt-1">Automates daily cause-list parsing from Supreme Court & High Courts, updates lawyer calendar, synthesizes Key Case Notes, and dispatches email digests.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <!-- Cause List Table (Span 7) -->
-                <div class="lg:col-span-7 bento-card-navy p-6 space-y-4">
+                <div class="lg:col-span-7 bento-tile p-6 space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-mint uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="list-todo" class="w-4 h-4 text-mint"></i> Today's Live Court Cause List
+                        <span class="text-xs font-bold text-amber uppercase tracking-wider flex items-center gap-2 font-mono">
+                            <i data-lucide="list-todo" class="w-4 h-4 text-amber"></i> Today's Live Court Cause List
                         </span>
-                        <span class="text-xs text-mint font-mono font-semibold">Oct 08, 2026 — 06:00 AM Sync</span>
+                        <span class="text-xs text-kinetic-muted font-mono font-semibold">Oct 08, 2026 — 06:00 AM Sync</span>
                     </div>
 
                     <div class="space-y-3">
-                        <div class="p-4 rounded-2xl bg-navy-800 border border-mint/20 flex items-center justify-between">
+                        <div class="p-4 rounded-2xl bg-obsidian-800 border border-obsidian-border flex items-center justify-between">
                             <div>
                                 <div class="flex items-center gap-2">
                                     <span class="text-xs font-bold text-white">Item #14 — Item No. 104</span>
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-mint text-navy-900 font-mono font-bold">Supreme Court Court 2</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-amber/15 text-amber border border-amber/30 font-mono font-bold">Supreme Court Court 2</span>
                                 </div>
-                                <p class="text-xs text-mint/80 mt-1">XYZ Pvt Ltd vs Union of India (W.P.(C) 410/2025)</p>
+                                <p class="text-xs text-kinetic-light mt-1">XYZ Pvt Ltd vs Union of India (W.P.(C) 410/2025)</p>
                             </div>
-                            <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-mint text-navy-900">Passed Over</span>
+                            <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-amber text-obsidian-900 font-mono">Passed Over</span>
                         </div>
 
-                        <div class="p-4 rounded-2xl bg-navy-800 border border-mint/20 flex items-center justify-between">
+                        <div class="p-4 rounded-2xl bg-obsidian-800 border border-obsidian-border flex items-center justify-between">
                             <div>
                                 <div class="flex items-center gap-2">
                                     <span class="text-xs font-bold text-white">Item #28 — Item No. 209</span>
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-mint text-navy-900 font-mono font-bold">NCLAT Bench 1</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-amber/15 text-amber border border-amber/30 font-mono font-bold">NCLAT Bench 1</span>
                                 </div>
-                                <p class="text-xs text-mint/80 mt-1">ABC Finance Corp vs Apex Holdings (Company Appeal 88/2026)</p>
+                                <p class="text-xs text-kinetic-light mt-1">ABC Finance Corp vs Apex Holdings (Company Appeal 88/2026)</p>
                             </div>
-                            <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-mint text-navy-900">Heard & Reserved</span>
+                            <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-amber text-obsidian-900 font-mono">Heard & Reserved</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Secondary Mint Panel Email Dispatcher (Span 5) -->
-                <div class="lg:col-span-5 bento-panel-mint p-6 flex flex-col justify-between space-y-4 shadow-xl">
+                <!-- Secondary Amber Panel Email Dispatcher (Span 5) -->
+                <div class="lg:col-span-5 bento-amber p-6 flex flex-col justify-between space-y-4 shadow-xl">
                     <div class="space-y-3">
-                        <span class="text-xs font-extrabold uppercase tracking-wider text-navy-900 flex items-center gap-2 pb-2 border-b border-navy-900/20">
-                            <i data-lucide="mail" class="w-4 h-4 text-navy-900"></i> Key Case Note Dispatch
+                        <span class="text-xs font-black uppercase tracking-wider text-obsidian-900 flex items-center gap-2 pb-2 border-b border-obsidian-900/20 font-mono">
+                            <i data-lucide="mail" class="w-4 h-4 stroke-[2.5]"></i> Key Case Note Dispatch
                         </span>
 
-                        <div class="p-4 rounded-xl bg-navy-900 text-white space-y-2">
-                            <span class="text-[10px] font-mono text-mint uppercase block font-bold">Automated Legal Brief</span>
-                            <p class="text-xs text-mint/90 leading-relaxed">
+                        <div class="p-4 rounded-xl bg-obsidian-900 text-white space-y-2 border border-obsidian-border">
+                            <span class="text-[10px] font-mono text-amber uppercase block font-bold">Automated Legal Brief</span>
+                            <p class="text-xs text-kinetic-light leading-relaxed">
                                 <strong class="text-white">Case Note:</strong> In <em>XYZ Pvt Ltd vs UOI</em>, Supreme Court Court 2 passed over Item 104 to 2:00 PM session. Counsel instructed to submit supplementary affidavit on Section 241 compliance.
                             </p>
                         </div>
                     </div>
 
-                    <button onclick="sendEmailDigest()" class="btn-press w-full py-3.5 rounded-xl bg-navy-900 text-mint font-extrabold text-xs shadow-lg flex items-center justify-center gap-2 hover:bg-navy-800">
-                        <i data-lucide="send" class="w-4 h-4"></i> Dispatch Email Digest & Sync iCal Calendar (.ics)
+                    <button onclick="sendEmailDigest()" class="btn-press w-full py-3.5 rounded-xl bg-obsidian-900 text-amber border border-obsidian-border font-extrabold text-xs shadow-lg flex items-center justify-center gap-2 hover:bg-obsidian-800">
+                        <i data-lucide="send" class="w-4 h-4 stroke-[2.5]"></i> Dispatch Email Digest & Sync iCal Calendar (.ics)
                     </button>
                 </div>
             </div>
@@ -425,25 +446,25 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-navy-950 border-t border-mint/20 py-4 px-6 text-center text-xs text-mint/70">
-        <p>LexAI — Tier-1 Legal Intelligence Engine. GitHub Repository: <a href="https://github.com/priyanshu1500/lexai" class="text-mint font-bold hover:underline">priyanshu1500/lexai</a></p>
+    <footer class="bg-obsidian-950 border-t border-obsidian-border py-4 px-6 text-center text-xs text-kinetic-muted font-mono">
+        <p>LexAI — Tier-1 Legal Intelligence Engine. GitHub Repository: <a href="https://github.com/priyanshu1500/lexai" class="text-amber font-bold hover:underline">priyanshu1500/lexai</a></p>
     </footer>
 
-    <!-- Interactive JavaScript -->
+    <!-- Interactive JavaScript Engine -->
     <script>
         lucide.createIcons();
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('bg-mint', 'text-navy-900', 'shadow-md');
-                el.classList.add('text-mint/80');
+            document.querySelectorAll('.nav-snap-btn').forEach(el => {
+                el.classList.remove('active', 'bg-amber', 'text-obsidian-900');
+                el.classList.add('text-kinetic-light');
             });
 
             document.getElementById('pane-' + tabName).classList.add('active');
             const activeBtn = document.getElementById('tab-' + tabName);
-            activeBtn.classList.remove('text-mint/80');
-            activeBtn.classList.add('bg-mint', 'text-navy-900', 'shadow-md');
+            activeBtn.classList.remove('text-kinetic-light');
+            activeBtn.classList.add('active', 'bg-amber', 'text-obsidian-900');
         }
 
         function loadSamplePrompt(type) {
